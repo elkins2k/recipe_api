@@ -10,7 +10,7 @@ app.use('/api/users', require('./controllers/users'))
 app.use('/api/recipes', require('./controllers/recipes'))
 app.use('/api/contents', require('./controllers/contents'))
 
-app.set("port", process.env.PORT || 3000)
+app.set("port", process.env.PORT || 8080)
 app.listen(app.get("port"), () => {
   console.log(`✅ PORT: ${app.get("port")} 🌟`)
 })
