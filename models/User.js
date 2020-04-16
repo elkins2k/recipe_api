@@ -31,7 +31,7 @@ const User = new mongoose.Schema ({
     },
     quinoa: {
       type: Boolean, 
-      default: false
+      default: true
     },
     shellfish: {
       type: Boolean, 
