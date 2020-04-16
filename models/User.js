@@ -4,44 +4,42 @@ const User = new mongoose.Schema ({
   email: String,
   firstName: String,
   lastName: String,
-  avoids: {
-    carbs: {
+  avoidCarbs: {
       type: Boolean, 
       default: false
     },
-    dairy: {
+  avoidDairy: {
       type: Boolean, 
       default: false
     },
-    eggs: {
+  avoidEggs: {
       type: Boolean, 
       default: false
     },
-    gluten: {
+  avoidGluten: {
       type: Boolean, 
       default: false
     },
-    meat: {
+  avoidMeat: {
       type: Boolean, 
       default: false
     },
-    nuts: {
+  avoidNuts: {
       type: Boolean, 
       default: false
     },
-    quinoa: {
+  avoidQuinoa: {
       type: Boolean, 
       default: true
     },
-    shellfish: {
+  avoidShellfish: {
       type: Boolean, 
       default: false
     },
-    spicy: {
+  avoidSpicy: {
       type: Boolean, 
       default: false
-    }    
-  }
+    }
 })
 
 module.exports = mongoose.model ( 'User', User )
