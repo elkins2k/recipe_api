@@ -5,15 +5,42 @@ const User = new mongoose.Schema ({
   firstName: String,
   lastName: String,
   avoids: {
-    carbs: Boolean,
-    dairy: Boolean,
-    eggs: Boolean,
-    gluten: Boolean,
-    meat: Boolean,
-    nuts: Boolean,
-    quinoa: Boolean,
-    shellfish: Boolean,
-    spicy: Boolean    
+    carbs: {
+      type: Boolean, 
+      default: false
+    },
+    dairy: {
+      type: Boolean, 
+      default: false
+    },
+    eggs: {
+      type: Boolean, 
+      default: false
+    },
+    gluten: {
+      type: Boolean, 
+      default: false
+    },
+    meat: {
+      type: Boolean, 
+      default: false
+    },
+    nuts: {
+      type: Boolean, 
+      default: false
+    },
+    quinoa: {
+      type: Boolean, 
+      default: false
+    },
+    shellfish: {
+      type: Boolean, 
+      default: false
+    },
+    spicy: {
+      type: Boolean, 
+      default: false
+    }    
   }
 })
 
