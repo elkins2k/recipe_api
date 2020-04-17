@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 //   }
 // }
 // app.use(cors(corsOptions))
-app.use(cors())
+// app.use(cors())
 
 app.use('/api/users', require('./controllers/users'))
 app.use('/api/recipes', require('./controllers/recipes'))
