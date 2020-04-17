@@ -17,7 +17,6 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  let newContents={}
   const newRecipe = {
     name: req.body.name,
     instructions: req.body.instructions,
@@ -26,27 +25,26 @@ router.post('/', (req, res) => {
   }
   Content
     .findOne({heading: req.body.heading})
-    .then( content => {
+    .then(content => {
       if (!content) {
         Content
           .create({heading:req.body.heading})
           .then(newContent => {
-            newContents = newContent
-            console.log('newContent',newContent)
             newRecipe.heading = newContent._id
             Recipe
               .create(newRecipe)
               .then(recipe => {
-                console.log(recipe,newContents)
-                res.json({recipe:recipe, newContents:newContents, line:'41'})
+                recipe.heading = newContent
+                res.json(recipe)
               })
           })
     } else {
-      newContents=content
-      newRecipe.heading = content._id
       Recipe
         .create(newRecipe)
-        .then(recipe => res.json({recipe:recipe, newContents:newContents, line:'48'}))
+        .then(recipe => {
+          recipe.heading = content
+          res.json(recipe)
+        })
     }
   })
 })
