@@ -7,7 +7,7 @@ const Recipe = new mongoose.Schema ({
     ref: 'Content'
   },
   ingredients: [],
-  directions: String,
+  directions: TextArea,
   submittedBy: {
     type:mongoose.Schema.Types.ObjectId,
     ref: 'User'
