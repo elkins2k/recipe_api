@@ -6,13 +6,13 @@ const Content = require('../models/Content')
 
 router.get('/', (req, res) => {
   Recipe
-    .find({})
+    .find({}).populate('heading')
     .then(all => res.json(all))
 })
 
 router.get('/:id', (req, res) => {
   Recipe
-    .findById(req.params.id)
+    .findById(req.params.id).populate('heading')
     .then(single => res.json(single))
 })
 
@@ -22,19 +22,19 @@ router.post('/', (req, res) => {
     directions: req.body.directions,
     submittedBy: req.body.submittedBy
   }
-  Content.findOne({mainProtein: req.body.mainProtein})
+  Content.findOne({heading: req.body.heading})
     .then(content => {
       if (!content) {
         Content
-        .create({mainProtein:req.body.mainProtein})
+        .create({heading:req.body.heading})
         .then(newContent => {
-          newRecipe.mainProtein = newContent._id
+          newRecipe.heading._id = newContent._id
           Recipe
             .create(newRecipe)
             .then(recipe => res.json(recipe))
       })
     } else {
-      newRecipe.mainProtein = content._id
+      newRecipe.heading = content._id
         Recipe
           .create(newRecipe)
           .then(recipe => res.json(recipe))

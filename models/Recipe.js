@@ -7,11 +7,8 @@ const Recipe = new mongoose.Schema ({
     ref: 'Content'
   },
   ingredients: [],
-  directions: TextArea,
-  submittedBy: {
-    type:mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }
+  directions: String,
+  submittedBy: String
 })
 
 module.exports = mongoose.model ( 'Recipe', Recipe )
