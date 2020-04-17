@@ -17,27 +17,36 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+  let newContents={}
   const newRecipe = {
     name: req.body.name,
+    instructions: req.body.instructions,
     directions: req.body.directions,
     submittedBy: req.body.submittedBy
   }
-  Content.findOne({heading: req.body.heading})
-    .then(content => {
+  Content
+    .findOne({heading: req.body.heading})
+    .then( content => {
       if (!content) {
         Content
-        .create({heading:req.body.heading})
-        .then(newContent => {
-          newRecipe.heading._id = newContent._id
-          Recipe
-            .create(newRecipe)
-            .then(recipe => res.json(recipe))
-      })
+          .create({heading:req.body.heading})
+          .then(newContent => {
+            newContents = newContent
+            console.log('newContent',newContent)
+            newRecipe.heading = newContent._id
+            Recipe
+              .create(newRecipe)
+              .then(recipe => {
+                console.log(recipe,newContents)
+                res.json({recipe:recipe, newContents:newContents, line:'41'})
+              })
+          })
     } else {
+      newContents=content
       newRecipe.heading = content._id
-        Recipe
-          .create(newRecipe)
-          .then(recipe => res.json(recipe))
+      Recipe
+        .create(newRecipe)
+        .then(recipe => res.json({recipe:recipe, newContents:newContents, line:'48'}))
     }
   })
 })
@@ -59,7 +68,8 @@ router.delete('/:id', (req, res) => {
   Recipe
     .findOneAndDelete({ _id: req.params.id })
     .then(() => {
-      Recipe.find({})
+      Recipe
+        .find({}).populate('heading')
         .then(all => res.json(all))
     })
 })
