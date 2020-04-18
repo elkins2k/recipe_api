@@ -6,7 +6,7 @@ const Content = require('../models/Content')
 
 router.get('/', (req, res) => {
   Recipe
-    .find({}).populate('heading')
+    .find({}).populate('heading').sort('name ASC')
     .then(all => res.json(all))
 })
 
@@ -49,6 +49,18 @@ router.post('/', (req, res) => {
   })
 })
 
+router.post('/:recipeId/new-ingredient', (req, res) => {
+  Recipe
+    .findById(req.params.recipeId)
+    .then(recipe => {
+      let newIngredient = req.body
+      newIngredient.done = false
+      recipe.ingredients.push(newIngredient)
+      recipe.save()
+      res.json(recipe)
+    })
+})
+
 router.put('/:id', (req, res) => {
   Recipe
     .findOneAndUpdate(
@@ -57,7 +69,7 @@ router.put('/:id', (req, res) => {
     )
     .then(() => {
       Recipe
-        .find({})
+        .find({}).populate('heading').sort('name ASC')
         .then(all => res.json(all))
     })
 })
@@ -67,8 +79,19 @@ router.delete('/:id', (req, res) => {
     .findOneAndDelete({ _id: req.params.id })
     .then(() => {
       Recipe
-        .find({}).populate('heading')
+        .find({}).populate('heading').sort('name ASC')
         .then(all => res.json(all))
+    })
+})
+
+router.delete("/:recipeId/delete-ingredient/:ingredientId", (req, res) => {
+  User
+    .findById(req.params.recipeId)
+    .then(recipe => {
+      let ingredientIndex = recipe.ingredients.findIndex(ingredient => ingredient._id == req.params.ingredientId)
+      recipe.ingredients.splice(ingredientIndex, 1)
+      recipe.save()
+      res.json(recipe)
     })
 })
 
