@@ -51,11 +51,11 @@ router.post('/', (req, res) => {
 
 router.post('/:recipeId/new-ingredient', (req, res) => {
   Recipe
-    .findById(req.params.recipeId)
-    .then(recipe => {
+    .findById (req.params.recipeId)
+    .then (recipe => {
       let newIngredient = req.body
-      recipe.ingredients.push(newIngredient)
-      recipe.save()
+      recipe.ingredients.push (newIngredient)
+      recipe.save ()
       res.json(recipe)
     })
 })
@@ -78,7 +78,7 @@ router.delete('/:id', (req, res) => {
     .findOneAndDelete({ _id: req.params.id })
     .then(() => {
       Recipe
-        .find({}).populate('heading').sort('name ASC')
+        .find({})
         .then(all => res.json(all))
     })
 })

@@ -3,17 +3,17 @@ const router = express.Router()
 
 const User = require('../models/User')
 
-router.get('/', (req, res) => {
-  User
-    .find({})
-    .then(all => res.json(all))
-})
+// router.get('/', (req, res) => {
+//   User
+//     .find({})
+//     .then(all => res.json(all))
+// })
 
-router.get('/:id', (req, res) => {
-  User
-    .findById(req.params.id)
-    .then(single => res.json(single))
-})
+// router.get('/:id', (req, res) => {
+//   User
+//     .findById(req.params.id)
+//     .then(single => res.json(single))
+// })
 
 router.post('/', (req, res) => {
   User
