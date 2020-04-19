@@ -54,7 +54,6 @@ router.post('/:recipeId/new-ingredient', (req, res) => {
     .findById(req.params.recipeId)
     .then(recipe => {
       let newIngredient = req.body
-      newIngredient.done = false
       recipe.ingredients.push(newIngredient)
       recipe.save()
       res.json(recipe)
@@ -85,13 +84,17 @@ router.delete('/:id', (req, res) => {
 })
 
 router.delete("/:recipeId/delete-ingredient/:ingredientId", (req, res) => {
-  User
+  Recipe
     .findById(req.params.recipeId)
     .then(recipe => {
       let ingredientIndex = recipe.ingredients.findIndex(ingredient => ingredient._id == req.params.ingredientId)
       recipe.ingredients.splice(ingredientIndex, 1)
       recipe.save()
-      res.json(recipe)
+    })
+    .then(() => {
+      Recipe
+        .find({}).populate('heading').sort('name ASC')
+        .then(all => res.json(all))
     })
 })
 
