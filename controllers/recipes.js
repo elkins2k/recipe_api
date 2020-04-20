@@ -6,7 +6,7 @@ const Content = require('../models/Content')
 
 router.get('/', (req, res) => {
   Recipe
-    .find({}).populate('heading').sort('name ASC')
+    .find().populate('heading').sort('name ASC')
     .then(all => res.json(all))
 })
 
@@ -68,7 +68,7 @@ router.put('/:id', (req, res) => {
     )
     .then(() => {
       Recipe
-        .find({}).populate('heading').sort('name ASC')
+        .find().populate('heading').sort('name ASC')
         .then(all => res.json(all))
     })
 })
@@ -78,7 +78,7 @@ router.delete('/:id', (req, res) => {
     .findOneAndDelete({ _id: req.params.id })
     .then(() => {
       Recipe
-        .find({})
+        .find().populate('heading').sort('name ASC')
         .then(all => res.json(all))
     })
 })
