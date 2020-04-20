@@ -30,7 +30,7 @@ router.put ( '/:id', ( req, res ) => {
     )
     .then ( () => {
       Content.find ()
-        // .sort('heading ASC')
+        .sort('heading ASC')
         .then ( all => res.json ( all ))
     })
 })
