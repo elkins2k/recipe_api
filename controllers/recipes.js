@@ -19,8 +19,8 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const newRecipe = {
     name: req.body.name,
-    instructions: req.body.instructions,
-    directions: req.body.directions,
+    // instructions: req.body.instructions,
+    // directions: req.body.directions,
     submittedBy: req.body.submittedBy
   }
   Content
@@ -28,18 +28,21 @@ router.post('/', (req, res) => {
     .then(content => {
       if (!content) {
         Content
-          .create({heading:req.body.heading})
+          .create({
+            heading: req.body.heading,
+            lower: req.body.heading.toLowerCase()
+          })
           .then(newContent => {
             newRecipe.heading = newContent._id
             Recipe
               .create(newRecipe)
               .then(recipe => {
                 recipe.heading = newContent
-                recipe.heading.lower = newContent.toLowerCase()
                 res.json(recipe)
               })
           })
     } else {
+      newRecipe.heading = content._id
       Recipe
         .create(newRecipe)
         .then(recipe => {
@@ -69,7 +72,7 @@ router.put('/:id', (req, res) => {
     )
     .then(() => {
       Recipe
-        .find().populate('heading').sort('name ASC')
+        .find().sort('name ASC').populate('heading')
         .then(all => res.json(all))
     })
 })
