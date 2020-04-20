@@ -5,7 +5,7 @@ const Content = require ( '../models/Content')
 
 router.get ('/', ( req, res ) => {
   Content.find ()
-    .sort('heading ASC')
+    .sort('lower ASC')
     .then ( all => res.json ( all ))
 })
 
@@ -18,7 +18,7 @@ router.post ('/', ( req, res ) => {
   Content.create ( req.body )
     .then ( () => {
       Content.find ()
-        .sort('heading ASC')
+        .sort('lower ASC')
         .then (all => res.json ( all ))
     })
 })
@@ -30,7 +30,7 @@ router.put ( '/:id', ( req, res ) => {
     )
     .then ( () => {
       Content.find ()
-        .sort('heading ASC')
+        .sort('lower ASC')
         .then ( all => res.json ( all ))
     })
 })
@@ -39,7 +39,7 @@ router.delete ( '/:id', ( req, res ) => {
   Content.findOneAndDelete ({ _id: req.params.id })
     .then ( () => {
       Content.find ()
-        .sort('heading ASC')
+        .sort('lower ASC')
         .then (all => res.json ( all ))
     })
 })

@@ -19,8 +19,6 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const newRecipe = {
     name: req.body.name,
-    // instructions: req.body.instructions,
-    // directions: req.body.directions,
     submittedBy: req.body.submittedBy
   }
   Content
