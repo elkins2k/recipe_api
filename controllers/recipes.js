@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
     submittedBy: req.body.submittedBy
   }
   Content
-    .findOne({heading: req.body.heading})
+    .findOne({lower: req.body.heading.toLowerCase()})
     .then(content => {
       if (!content) {
         Content
@@ -35,6 +35,7 @@ router.post('/', (req, res) => {
               .create(newRecipe)
               .then(recipe => {
                 recipe.heading = newContent
+                recipe.heading.lower = newContent.toLowerCase()
                 res.json(recipe)
               })
           })
