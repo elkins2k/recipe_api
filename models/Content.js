@@ -5,9 +5,9 @@ const Content = new mongoose.Schema ({
   lower: String
 })
 
-Content.pre ('save', function () {
+Content.pre ('validate', function () {
   this.lower = this.heading.toLowerCase()
-  return next()
+  return
 })
 
 module.exports = mongoose.model ( 'Content', Content )
