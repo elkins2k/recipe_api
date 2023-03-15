@@ -1,23 +1,23 @@
 {
-  "name": "recipe-api",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node ./index.js"
-  },
-  "dependencies": {
-    "acorn": ">=5.7.4",
-    "clean-css": "^4.2.3",
-    "constantinople": "^4.0.1",
-    "cookie-parser": "~1.4.4",
-    "cors": "^2.8.5",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "heroku": "^7.39.2",
-    "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
-    "mongoose": "^5",
-    "morgan": "~1.9.1",
-    "nodemon": "^2.0.3"
-  }
+    "name": "recipe-api",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "start": "node ./index.js"
+    },
+    "dependencies": {
+        "acorn": "^5.7.4",
+        "clean-css": "^4.2.3",
+        "constantinople": "^4.0.1",
+        "cookie-parser": "^1.4.4",
+        "cors": "^2.8.5",
+        "debug": "^2.6.9",
+        "express": "^4.18.2",
+        "heroku": "^7.7.8",
+        "http-errors": "^1.6.3",
+        "jade": "^0.29.0",
+        "mongoose": "^5",
+        "morgan": "^1.9.1",
+        "nodemon": "^2.0.3"
+    }
 }
